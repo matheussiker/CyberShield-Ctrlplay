@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CyberSentinels — Central</title>
+    <link rel="stylesheet" href="../css/style5.css" />
+  </head>
+
+  <body>
+    <audio id="musicaFundo" autoplay loop>
+      <source src="../public/sounds/fundo.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="somContinuar">
+      <source src="../public/sounds/transição2.mp3" type="audio/mpeg" />
+    </audio>
+    <audio id="somClique">
+      <source src="../public/sounds/concluído.mp3" type="audio/mpeg" />
+    </audio>
+
+    <div class="grid"></div>
+    <div class="particulas"></div>
+    <div class="corner corner--tl"></div>
+    <div class="corner corner--tr"></div>
+    <div class="corner corner--bl"></div>
+    <div class="corner corner--br"></div>
+
+    <div class="central-wrapper" id="centralWrapper">
+      <div class="pagina-titulo">
+        CENTRAL DE <span class="accent">MONITORAMENTO</span>
+      </div>
+
+      <div class="cards-grid">
+        <!-- CARD 1 — nenhum checked -->
+        <div class="card" id="card-bloqueio">
+          <div class="cc cc--tl"></div><div class="cc cc--tr"></div>
+          <div class="cc cc--bl"></div><div class="cc cc--br"></div>
+          <div class="card-header">
+            <span class="card-icon">&#x2298;</span>
+            <div>
+              <div class="card-title">BLOQUEIO DE APLICATIVOS</div>
+              <div class="card-status" id="status-bloqueio">AGUARDANDO CONFIGURAÇÃO</div>
+            </div>
+            <div class="card-badge" id="badge-bloqueio">—</div>
+          </div>
+          <div class="card-body">
+            <p class="card-desc">Selecione os aplicativos que devem ser bloqueados durante períodos de foco.</p>
+            <div class="app-list">
+              <label class="app-toggle"><input type="checkbox" data-card="bloqueio" /><span class="toggle-track"><span class="toggle-thumb"></span></span><span>Instagram</span></label>
+              <label class="app-toggle"><input type="checkbox" data-card="bloqueio" /><span class="toggle-track"><span class="toggle-thumb"></span></span><span>TikTok</span></label>
+              <label class="app-toggle"><input type="checkbox" data-card="bloqueio" /><span class="toggle-track"><span class="toggle-thumb"></span></span><span>YouTube</span></label>
+              <label class="app-toggle"><input type="checkbox" data-card="bloqueio" /><span class="toggle-track"><span class="toggle-thumb"></span></span><span>WhatsApp</span></label>
+              <label class="app-toggle"><input type="checkbox" data-card="bloqueio" /><span class="toggle-track"><span class="toggle-thumb"></span></span><span>Twitter / X</span></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2 — sliders mantêm value mas sem interação prévia -->
+        <div class="card" id="card-tempo">
+          <div class="cc cc--tl"></div><div class="cc cc--tr"></div>
+          <div class="cc cc--bl"></div><div class="cc cc--br"></div>
+          <div class="card-header">
+            <span class="card-icon">&#x25F7;</span>
+            <div>
+              <div class="card-title">TEMPO DE TELA PERMITIDO</div>
+              <div class="card-status" id="status-tempo">AGUARDANDO CONFIGURAÇÃO</div>
+            </div>
+            <div class="card-badge" id="badge-tempo">—</div>
+          </div>
+          <div class="card-body">
+            <p class="card-desc">Defina o limite diário de uso permitido por categoria.</p>
+            <div class="tempo-list">
+              <div class="tempo-item">
+                <span class="tempo-label">REDES SOCIAIS</span>
+                <div class="tempo-slider-wrap">
+                  <input type="range" min="0" max="240" value="60" class="slider" data-card="tempo" data-label="redesSociais" />
+                  <span class="tempo-val" id="val-redesSociais">60 min</span>
+                </div>
+              </div>
+              <div class="tempo-item">
+                <span class="tempo-label">ENTRETENIMENTO</span>
+                <div class="tempo-slider-wrap">
+                  <input type="range" min="0" max="240" value="90" class="slider" data-card="tempo" data-label="entretenimento" />
+                  <span class="tempo-val" id="val-entretenimento">90 min</span>
+                </div>
+              </div>
+              <div class="tempo-item">
+                <span class="tempo-label">JOGOS</span>
+                <div class="tempo-slider-wrap">
+                  <input type="range" min="0" max="240" value="45" class="slider" data-card="tempo" data-label="jogos" />
+                  <span class="tempo-val" id="val-jogos">45 min</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 3 — removido checked dos radios -->
+        <div class="card" id="card-relatorio">
+          <div class="cc cc--tl"></div><div class="cc cc--tr"></div>
+          <div class="cc cc--bl"></div><div class="cc cc--br"></div>
+          <div class="card-header">
+            <span class="card-icon">&#x2B21;</span>
+            <div>
+              <div class="card-title">RELATÓRIOS DE ATIVIDADE</div>
+              <div class="card-status" id="status-relatorio">AGUARDANDO CONFIGURAÇÃO</div>
+            </div>
+            <div class="card-badge" id="badge-relatorio">—</div>
+          </div>
+          <div class="card-body">
+            <p class="card-desc">Escolha a frequência e o formato dos relatórios gerados pelo sistema.</p>
+            <div class="radio-group">
+              <label class="radio-item"><input type="radio" name="relatorio" value="diario" /><span class="radio-box"></span><span>Diário</span></label>
+              <label class="radio-item"><input type="radio" name="relatorio" value="semanal" /><span class="radio-box"></span><span>Semanal</span></label>
+              <label class="radio-item"><input type="radio" name="relatorio" value="mensal" /><span class="radio-box"></span><span>Mensal</span></label>
+            </div>
+            <div class="radio-group" style="margin-top: 12px">
+              <label class="radio-item"><input type="radio" name="formato" value="resumido" /><span class="radio-box"></span><span>Resumido</span></label>
+              <label class="radio-item"><input type="radio" name="formato" value="completo" /><span class="radio-box"></span><span>Completo</span></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 4 — removido checked dos toggles -->
+        <div class="card" id="card-alertas">
+          <div class="cc cc--tl"></div><div class="cc cc--tr"></div>
+          <div class="cc cc--bl"></div><div class="cc cc--br"></div>
+          <div class="card-header">
+            <span class="card-icon">&#x25C9;</span>
+            <div>
+              <div class="card-title">ALERTAS E NOTIFICAÇÕES</div>
+              <div class="card-status" id="status-alertas">AGUARDANDO CONFIGURAÇÃO</div>
+            </div>
+            <div class="card-badge" id="badge-alertas">—</div>
+          </div>
+          <div class="card-body">
+            <p class="card-desc">Configure quais eventos disparam alertas automáticos.</p>
+            <div class="app-list">
+              <label class="app-toggle"><input type="checkbox" data-card="alertas" /><span class="toggle-track"><span class="toggle-thumb"></span></span><span>Uso excessivo detectado</span></label>
+              <label class="app-toggle"><input type="checkbox" data-card="alertas" /><span class="toggle-track"><span class="toggle-thumb"></span></span><span>Acesso não autorizado</span></label>
+              <label class="app-toggle"><input type="checkbox" data-card="alertas" /><span class="toggle-track"><span class="toggle-thumb"></span></span><span>App bloqueado tentou abrir</span></label>
+              <label class="app-toggle"><input type="checkbox" data-card="alertas" /><span class="toggle-track"><span class="toggle-thumb"></span></span><span>Limite de tempo atingido</span></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 5 — removido checked do radio -->
+        <div class="card card--wide" id="card-controle">
+          <div class="cc cc--tl"></div><div class="cc cc--tr"></div>
+          <div class="cc cc--bl"></div><div class="cc cc--br"></div>
+          <div class="card-header">
+            <span class="card-icon">&#x2B22;</span>
+            <div>
+              <div class="card-title">CONTROLE REMOTO</div>
+              <div class="card-status" id="status-controle">AGUARDANDO CONFIGURAÇÃO</div>
+            </div>
+            <div class="card-badge" id="badge-controle">—</div>
+          </div>
+          <div class="card-body card-body--row">
+            <p class="card-desc" style="margin-bottom: 0; flex: 1">Permita que o administrador aplique configurações remotamente em tempo real.</p>
+            <div class="radio-group">
+              <label class="radio-item"><input type="radio" name="controle" value="ativo" /><span class="radio-box"></span><span>Ativo</span></label>
+              <label class="radio-item"><input type="radio" name="controle" value="somente-leitura" /><span class="radio-box"></span><span>Somente leitura</span></label>
+              <label class="radio-item"><input type="radio" name="controle" value="desativado" /><span class="radio-box"></span><span>Desativado</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="progresso-wrap">
+        <div class="progresso-label">
+          <span>MÓDULOS CONFIGURADOS</span>
+          <span id="progressoTexto">0 / 5</span>
+        </div>
+        <div class="progresso-bar-bg">
+          <div class="progresso-bar" id="progressoBar"></div>
+        </div>
+      </div>
+
+      <div class="concluido-wrap" id="concluidoWrap">
+        <button id="btnConcluido">
+          <span class="btn-scan"></span>
+          CONFIGURAÇÃO CONCLUÍDA
+        </button>
+        <div class="concluido-sub">Todas as configurações foram salvas com sucesso.</div>
+      </div>
+    </div>
+
+    <!-- MODAL -->
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitulo">
+        <div class="modal-inner">
+          <div class="mc mc--tl"></div><div class="mc mc--tr"></div>
+          <div class="mc mc--bl"></div><div class="mc mc--br"></div>
+
+          <div class="modal-tag">BRIEFING INICIAL</div>
+
+          <div class="modal-icon">
+            <svg viewBox="0 0 52 52" fill="none">
+              <circle cx="26" cy="26" r="24" stroke="rgba(0,240,255,0.2)" stroke-width="1" stroke-dasharray="4 5" stroke-linecap="round" />
+              <circle cx="26" cy="26" r="18" stroke="rgba(0,240,255,0.45)" stroke-width="0.5" />
+            </svg>
+            <span class="modal-icon-char">&#x25C8;</span>
+          </div>
+
+          <h1 class="modal-title" id="modalTitulo">BEM-<span class="accent">VINDO</span></h1>
+          <div class="modal-sid" id="modalSid">SID :: ————————</div>
+          <div class="title-line"></div>
+
+          <p class="modal-intro">
+            Você está acessando a <strong style="color: #fff">Central de Monitoramento Digital</strong>
+            da CyberSentinels. Este sistema foi desenvolvido para garantir foco, produtividade e segurança digital em tempo real.
+          </p>
+
+          <div class="funcionalidades">
+            <div class="func-item"><span class="func-icon">&#x2298;</span><div class="func-texto"><div class="func-nome">Bloqueio de Aplicativos</div><div class="func-desc">Restringe o acesso a apps selecionados durante períodos de foco.</div></div></div>
+            <div class="func-item"><span class="func-icon">&#x25F7;</span><div class="func-texto"><div class="func-nome">Monitoramento de Tempo de Tela</div><div class="func-desc">Registra e analisa o tempo de uso por app e categoria em tempo real.</div></div></div>
+            <div class="func-item"><span class="func-icon">&#x2B21;</span><div class="func-texto"><div class="func-nome">Relatórios de Atividade</div><div class="func-desc">Gera relatórios detalhados com gráficos e comparativos semanais.</div></div></div>
+            <div class="func-item"><span class="func-icon">&#x25C9;</span><div class="func-texto"><div class="func-nome">Alertas e Notificações</div><div class="func-desc">Emite alertas ao detectar uso excessivo ou acesso não autorizado.</div></div></div>
+            <div class="func-item"><span class="func-icon">&#x2B22;</span><div class="func-texto"><div class="func-nome">Controle Remoto</div><div class="func-desc">Permite ao administrador aplicar restrições e ajustes remotamente.</div></div></div>
+          </div>
+
+          <div class="modal-aviso">
+            <div class="aviso-dot"></div>
+            <div class="aviso-texto">Todas as atividades são registradas. Ao continuar, você confirma ciência das políticas de uso.</div>
+          </div>
+
+          <div class="separator">
+            <div class="sep-dot"></div><div class="sep-dot"></div><div class="sep-dot"></div>
+          </div>
+
+          <button id="btnContinuar"><span class="btn-scan"></span>CONTINUAR</button>
+
+          <div class="modal-status">
+            <div class="modal-status-dot"></div>
+            CONEXÃO SEGURA ESTABELECIDA
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../scripts/script5.js"></script>
+  </body>
+</html>

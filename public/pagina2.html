@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Avaliação de Risco Digital</title>
+    <link rel="stylesheet" href="../css/style3.css" />
+  </head>
+  <body>
+    <!-- Música de fundo -->
+    <audio id="musicaFundo" autoplay loop volume="0.5">
+      <source src="../public/sounds/fundo.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- Fundo tecnológico -->
+    <div class="pattern-bg"></div>
+
+    <div class="dashboard">
+      <!-- HEADER -->
+      <div class="header">
+        <span class="header-tag">// SISTEMA DE ANÁLISE v2.0</span>
+        <h1 class="titulo-dashboard">⟨ AVALIAÇÃO DE COMPORTAMENTO DIGITAL ⟩</h1>
+        <p class="header-sub">
+          Identifique vulnerabilidades no seu comportamento online
+        </p>
+      </div>
+
+      <!-- CARD 1 — Perguntas -->
+      <div class="card-dashboard">
+        <div class="card-header">
+          <div class="card-icon">🛡</div>
+          <h3>// Análise de Comportamentos</h3>
+        </div>
+
+        <!-- Progresso -->
+        <div class="progresso-wrapper">
+          <div class="progresso-pílulas" id="pilulas">
+            <div class="pilula"></div>
+            <div class="pilula"></div>
+            <div class="pilula"></div>
+            <div class="pilula"></div>
+            <div class="pilula"></div>
+            <div class="pilula"></div>
+            <div class="pilula"></div>
+          </div>
+          <span id="progressoTexto">0 / 7 respondidas</span>
+        </div>
+
+        <!-- Pergunta 1 -->
+        <div class="pergunta">
+          <div>
+            <div class="numero-pergunta">01</div>
+            <p>Você usa a mesma senha em vários sites?</p>
+          </div>
+          <div class="btn-group">
+            <button type="button" onclick="responder(this, 14, 0)">Sim</button>
+            <button type="button" onclick="responder(this, 0, 0)">Não</button>
+          </div>
+        </div>
+
+        <!-- Pergunta 2 -->
+        <div class="pergunta">
+          <div>
+            <div class="numero-pergunta">02</div>
+            <p>Você verifica se o site é seguro (HTTPS)?</p>
+          </div>
+          <div class="btn-group">
+            <button type="button" onclick="responder(this, 0, 1)">Sim</button>
+            <button type="button" onclick="responder(this, 14, 1)">Não</button>
+          </div>
+        </div>
+
+        <!-- Pergunta 3 -->
+        <div class="pergunta">
+          <div>
+            <div class="numero-pergunta">03</div>
+            <p>Você já clicou em links suspeitos?</p>
+          </div>
+          <div class="btn-group">
+            <button type="button" onclick="responder(this, 14, 2)">Sim</button>
+            <button type="button" onclick="responder(this, 0, 2)">Não</button>
+          </div>
+        </div>
+
+        <!-- Pergunta 4 -->
+        <div class="pergunta">
+          <div>
+            <div class="numero-pergunta">04</div>
+            <p>Você utiliza autenticação em dois fatores (2FA)?</p>
+          </div>
+          <div class="btn-group">
+            <button type="button" onclick="responder(this, 0, 3)">Sim</button>
+            <button type="button" onclick="responder(this, 14, 3)">Não</button>
+          </div>
+        </div>
+
+        <!-- Pergunta 5 -->
+        <div class="pergunta">
+          <div>
+            <div class="numero-pergunta">05</div>
+            <p>Você mantém seus aplicativos e sistema atualizados?</p>
+          </div>
+          <div class="btn-group">
+            <button type="button" onclick="responder(this, 0, 4)">Sim</button>
+            <button type="button" onclick="responder(this, 14, 4)">Não</button>
+          </div>
+        </div>
+
+        <!-- Pergunta 6 -->
+        <div class="pergunta">
+          <div>
+            <div class="numero-pergunta">06</div>
+            <p>Você já compartilhou informações pessoais em redes públicas?</p>
+          </div>
+          <div class="btn-group">
+            <button type="button" onclick="responder(this, 14, 5)">Sim</button>
+            <button type="button" onclick="responder(this, 0, 5)">Não</button>
+          </div>
+        </div>
+
+        <!-- Pergunta 7 -->
+        <div class="pergunta">
+          <div>
+            <div class="numero-pergunta">07</div>
+            <p>Você lê permissões antes de instalar aplicativos?</p>
+          </div>
+          <div class="btn-group">
+            <button type="button" onclick="responder(this, 0, 6)">Sim</button>
+            <button type="button" onclick="responder(this, 14, 6)">Não</button>
+          </div>
+        </div>
+      </div>
+      <!-- /CARD 1 -->
+
+      <!-- CARD 2 — Barra de risco -->
+      <div class="card-dashboard">
+        <div class="card-header">
+          <div class="card-icon">📊</div>
+          <h3>// Nível de Risco Digital</h3>
+        </div>
+
+        <div class="risco-stats">
+          <div class="stat-box">
+            <div class="valor" id="statPct">0%</div>
+            <div class="rotulo">Score</div>
+          </div>
+          <div class="stat-box">
+            <div class="valor" id="statResp">0</div>
+            <div class="rotulo">Respondidas</div>
+          </div>
+          <div class="stat-box">
+            <div
+              class="valor"
+              id="statRisco"
+              style="font-size: 1rem; padding-top: 6px"
+            >
+              —
+            </div>
+            <div class="rotulo">Status</div>
+          </div>
+        </div>
+
+        <div class="barra-risco">
+          <div class="nivel" id="nivelRisco"></div>
+        </div>
+
+        <div class="risco-label">
+          <p id="textoRisco">Risco Atual: 0%</p>
+          <span class="badge-risco" id="badgeRisco">—</span>
+        </div>
+      </div>
+      <!-- /CARD 2 -->
+
+      <!-- CARD 3 — Recomendações -->
+      <div class="card-dashboard">
+        <div class="card-header">
+          <div class="card-icon">💡</div>
+          <h3>// Recomendações de Segurança</h3>
+        </div>
+        <div id="recomendacoes">
+          <p class="rec-vazio">
+            Responda às perguntas para gerar recomendações personalizadas.
+          </p>
+        </div>
+      </div>
+      <!-- /CARD 3 -->
+    </div>
+    <!-- /dashboard -->
+
+    <!-- Botão Avançar -->
+    <a
+      class="botao-avancar bloqueado"
+      id="btnAvancar"
+      title="Avançar para próxima etapa"
+      aria-label="Avançar para a próxima página"
+      onclick="trocarPagina()"
+    >
+      →
+    </a>
+
+    <!-- Som do botão -->
+    <audio id="somClique">
+      <source src="../public/sounds/transição.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- Tela de Transição -->
+    <div class="transicao" id="transicao">
+      <p class="transicao-logo">SISTEMA DE ANÁLISE</p>
+      <p id="textoCarregando">Gerando relatório...</p>
+      <div class="barra-container">
+        <div class="barra" id="barra"></div>
+      </div>
+      <p id="porcentagem">0%</p>
+    </div>
+    <!-- /transicao -->
+
+    <script src="../scripts/script3.js"></script>
+  </body>
+</html>

@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Termos e Condições</title>
+    <link rel="stylesheet" href="../css/style2.css" />
+    <a href="pagina2.html"></a>
+  </head>
+
+  <body>
+    <!-- Áudio de fundo -->
+    <audio id="musicaFundo" autoplay loop>
+      <source src="../public/sounds/fundo.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- FUNDO ANIMADO -->
+    <div class="pattern-bg"></div>
+
+    <!-- PARTÍCULAS -->
+    <div id="particles"></div>
+
+    <!-- Card Termos -->
+    <div class="card">
+      <h2>Termos e Condições</h2>
+
+      <p>
+        Ao utilizar este site, você concorda com nossos termos de uso e
+        políticas de privacidade.
+      </p>
+
+      <span class="ler-mais" id="lerMais">Ler mais</span>
+
+      <label class="checkbox-area">
+        <input type="checkbox" id="aceitar" />
+        Eu li e aceito os termos
+      </label>
+    </div>
+
+    <!-- Modal Sermão (aceita sem ler) -->
+    <div class="overlay" id="overlaySermao">
+      <div class="modal">
+        <h2>⚠ Você realmente leu?</h2>
+        <p>
+          Estudos mostram que mais de 90% das pessoas aceitam termos sem ler.
+          <br /><br />
+          Ao aceitar algo sem entender, você pode estar entregando seus dados,
+          sua privacidade e sua segurança.
+          <br /><br />
+          🔎 Cidadania digital começa com consciência.
+        </p>
+        <button onclick="fecharSermao()">Entendi</button>
+      </div>
+    </div>
+
+    <!-- Modal Parabéns (leu antes de aceitar) -->
+    <div class="overlay" id="overlayParabens">
+      <div class="modal">
+        <h2>👏 Parabéns!</h2>
+        <p>
+          Você demonstrou consciência digital ao buscar ler os termos antes de
+          aceitar.
+          <br /><br />
+          Pessoas assim tornam a internet mais segura! 🌐
+        </p>
+        <button onclick="fecharParabens()">Obrigado!</button>
+      </div>
+    </div>
+
+    <!-- Tooltip botão bloqueado -->
+    <div class="tooltip-bloqueado" id="tooltipBloqueado">
+      ✋ Aceite os termos primeiro
+    </div>
+
+    <!-- Botão Avançar -->
+    <div
+      class="botao-avancar"
+      id="btnAvancar"
+      title="Aceite os termos para avançar"
+      onclick="tentarAvancar()"
+    >
+      →
+    </div>
+
+    <!-- Som -->
+    <audio id="somClique">
+      <source src="../public/sounds/transição.mp3" type="audio/mpeg" />
+    </audio>
+
+    <div class="transicao" id="transicao">
+      <div class="loader">
+        <div class="transicao-logo">SISTEMA DE ANÁLISE</div>
+
+        <p id="textoCarregando">Inicializando sistema...</p>
+
+        <div class="barra-container">
+          <div class="barra" id="barra"></div>
+        </div>
+
+        <p id="porcentagem">0%</p>
+      </div>
+    </div>
+
+    <script src="../scripts/script2.js"></script>
+  </body>
+</html>

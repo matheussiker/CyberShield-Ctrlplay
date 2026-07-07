@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CyberSentinels</title>
+    <link rel="stylesheet" href="../css/style4.css" />
+  </head>
+
+  <body>
+    <!-- MÚSICA DE FUNDO -->
+    <audio id="musicaFundo" autoplay loop>
+      <source src="../public/sounds/fundo.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- SOM DO BOTÃO -->
+    <audio id="somClique">
+      <source src="../public/sounds/transição.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- GRID DE FUNDO -->
+    <div class="grid"></div>
+
+    <!-- PARTÍCULAS -->
+    <div class="particulas"></div>
+
+    <!-- CANTOS DECORATIVOS -->
+    <div class="corner corner--tl"></div>
+    <div class="corner corner--tr"></div>
+    <div class="corner corner--bl"></div>
+    <div class="corner corner--br"></div>
+
+    <!-- HUD SUPERIOR -->
+    <div class="hud-bar">
+      <div class="hud-item">
+        <span class="hud-label">NÍVEL</span>
+        <span class="hud-value" id="hudNivel">07</span>
+      </div>
+      <span class="hud-sep">|</span>
+      <div class="hud-item">
+        <span class="hud-label">SESSÃO</span>
+        <span class="hud-value" id="hudSessao">——</span>
+      </div>
+      <span class="hud-sep">|</span>
+      <div class="hud-item">
+        <span class="hud-label">STATUS</span>
+        <span class="hud-value">ATIVO</span>
+      </div>
+      <span class="hud-sep">|</span>
+      <div class="hud-item">
+        <span class="hud-label">HORA</span>
+        <span class="hud-value" id="hudHora">——:——</span>
+      </div>
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div class="container-final">
+      <!-- TEXTO SUPERIOR -->
+      <span class="status-topo">ACESSO LIBERADO</span>
+
+      <!-- PAINEL CENTRAL -->
+      <div class="painel-final">
+        <div class="painel-inner">
+          <!-- CANTOS DO PAINEL -->
+          <div class="painel-corner painel-corner--tl"></div>
+          <div class="painel-corner painel-corner--tr"></div>
+          <div class="painel-corner painel-corner--bl"></div>
+          <div class="painel-corner painel-corner--br"></div>
+
+          <!-- ÍCONE DE VERIFICAÇÃO -->
+          <div class="check-ring">
+            <svg
+              viewBox="0 0 56 56"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle
+                cx="28"
+                cy="28"
+                r="26"
+                stroke="rgba(0,240,255,0.2)"
+                stroke-width="1"
+                stroke-dasharray="4 6"
+                stroke-linecap="round"
+              />
+              <circle
+                cx="28"
+                cy="28"
+                r="20"
+                stroke="rgba(0,240,255,0.5)"
+                stroke-width="0.5"
+              />
+            </svg>
+            <span class="check-icon">✦</span>
+          </div>
+
+          <!-- ID DE SESSÃO -->
+          <div class="session-id" id="sessionId">SID :: ————————</div>
+
+          <!-- TÍTULO -->
+          <h1>PARA<span class="accent">BÉNS</span></h1>
+
+          <!-- LINHA DECORATIVA -->
+          <div class="title-line"></div>
+
+          <!-- TEXTO -->
+          <p>Você concluiu todas as etapas iniciais com sucesso.</p>
+          <p>
+            Agora você está apto para utilizar nossa<br />Central de
+            Monitoramento Digital.
+          </p>
+
+          <!-- SEPARADOR -->
+          <div class="separator">
+            <div class="separator-dot"></div>
+            <div class="separator-dot"></div>
+            <div class="separator-dot"></div>
+          </div>
+
+          <!-- BOTÃO -->
+          <button id="btnEntrar">
+            <span class="btn-scan"></span>
+            ACESSAR CENTRAL
+          </button>
+        </div>
+      </div>
+
+      <!-- STATUS INFERIOR -->
+      <div class="status-bottom">
+        <div class="status-node">
+          <div class="node-dot ok"></div>
+          <span>FIREWALL ATIVO</span>
+        </div>
+        <div class="status-node">
+          <div class="node-dot info"></div>
+          <span>CRIPTOGRAFIA 256-BIT</span>
+        </div>
+        <div class="status-node">
+          <div class="node-dot warn"></div>
+          <span>MONITORAMENTO ON</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TELA DE TRANSIÇÃO -->
+    <div class="transicao" id="transicao">
+      <div class="loader">
+        <div class="transicao-logo">SISTEMA DE ANÁLISE</div>
+
+        <!-- CÍRCULO -->
+        <div class="loader-ring">
+          <svg
+            viewBox="0 0 72 72"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              cx="36"
+              cy="36"
+              r="32"
+              stroke="rgba(0,240,255,0.1)"
+              stroke-width="1"
+            />
+            <circle
+              cx="36"
+              cy="36"
+              r="32"
+              stroke="rgba(0,240,255,0.8)"
+              stroke-width="1.5"
+              stroke-dasharray="50 150"
+              stroke-linecap="round"
+            />
+          </svg>
+          <div class="loader-ring-pct" id="porcentagem">0%</div>
+        </div>
+
+        <p id="textoCarregando">Inicializando sistema...</p>
+
+        <div class="barra-container">
+          <div class="barra" id="barra"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../scripts/script4.js"></script>
+
+    <!-- SCRIPT DE HUD (dados dinâmicos) -->
+    <script>
+      // Relógio
+      function atualizarHora() {
+        const agora = new Date();
+        const h = String(agora.getHours()).padStart(2, "0");
+        const m = String(agora.getMinutes()).padStart(2, "0");
+        document.getElementById("hudHora").textContent = h + ":" + m;
+      }
+      atualizarHora();
+      setInterval(atualizarHora, 1000);
+
+      // ID de sessão aleatório
+      function gerarSessao(len) {
+        const chars = "ABCDEF0123456789";
+        return Array.from(
+          { length: len },
+          () => chars[Math.floor(Math.random() * chars.length)],
+        ).join("");
+      }
+      const sid = gerarSessao(8);
+      document.getElementById("hudSessao").textContent =
+        sid.slice(0, 4) + "-" + sid.slice(4);
+      document.getElementById("sessionId").textContent =
+        "SID :: " + sid.slice(0, 4) + "-" + sid.slice(4);
+    </script>
+  </body>
+</html>

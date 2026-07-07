@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CyberSentinels — Concluído</title>
+    <link rel="stylesheet" href="../css/style6.css" />
+  </head>
+  <body>
+    <!-- MÚSICA EM LOOP -->
+    <audio id="musicaParabens" loop>
+      <source src="../public/sounds/parabens.mp3" type="audio/mpeg" />
+    </audio>
+
+    <!-- ANIMAÇÃO DE ENTRADA (scan reverso — sobe) -->
+    <div class="scan-entrada" id="scanEntrada"></div>
+
+    <!-- GRID DE FUNDO -->
+    <div class="grid"></div>
+
+    <!-- PARTÍCULAS -->
+    <div class="particulas"></div>
+
+    <!-- CANTOS DE TELA -->
+    <div class="corner corner--tl"></div>
+    <div class="corner corner--tr"></div>
+    <div class="corner corner--bl"></div>
+    <div class="corner corner--br"></div>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <div class="container" id="conteudo">
+      <!-- ÍCONE -->
+      <div class="check-wrap">
+        <svg class="check-ring" viewBox="0 0 120 120" fill="none">
+          <circle
+            cx="60"
+            cy="60"
+            r="54"
+            stroke="rgba(0,240,255,0.15)"
+            stroke-width="1"
+            stroke-dasharray="6 8"
+            stroke-linecap="round"
+          />
+          <circle
+            cx="60"
+            cy="60"
+            r="44"
+            stroke="rgba(0,240,255,0.35)"
+            stroke-width="0.8"
+          />
+          <circle
+            cx="60"
+            cy="60"
+            r="34"
+            stroke="rgba(0,240,255,0.6)"
+            stroke-width="1.5"
+            stroke-dasharray="200"
+            stroke-dashoffset="200"
+            class="check-progress"
+          />
+        </svg>
+        <div class="check-inner">
+          <span class="check-glyph">✦</span>
+        </div>
+      </div>
+
+      <!-- TAG -->
+      <div class="tag">SISTEMA CONFIGURADO</div>
+
+      <!-- TÍTULO -->
+      <h1 class="titulo">PARA<span class="accent">BÉNS</span></h1>
+
+      <!-- LINHA -->
+      <div class="linha"></div>
+
+      <!-- MENSAGEM -->
+      <p class="mensagem">Todas as alterações foram concluídas com sucesso.</p>
+      <p class="mensagem mensagem--sub">
+        Muito obrigado por utilizar nosso<br />
+        <strong>software de segurança digital.</strong>
+      </p>
+
+      <!-- SEPARADOR -->
+      <div class="separator">
+        <div class="sep-dot"></div>
+        <div class="sep-dot"></div>
+        <div class="sep-dot"></div>
+      </div>
+
+      <!-- STATUS NODES -->
+      <div class="status-nodes">
+        <div class="node">
+          <div class="node-dot ok"></div>
+          <span>CONFIGURAÇÃO SALVA</span>
+        </div>
+        <div class="node">
+          <div class="node-dot ok"></div>
+          <span>SISTEMA ATIVO</span>
+        </div>
+        <div class="node">
+          <div class="node-dot ok"></div>
+          <span>MONITORAMENTO ON</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTÃO VOLTAR AO INÍCIO -->
+    <div class="voltar-wrap">
+      <button id="btnVoltar" type="button" onclick="window.location.href = '../index.html';">
+        <span class="btn-scan"></span>
+        &#x2190; &nbsp;VOLTAR AO INÍCIO
+      </button>
+    </div>
+
+    <script src="../scripts/script6.js"></script>
+  </body>
+</html>

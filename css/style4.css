@@ -1,0 +1,922 @@
+/* =========================
+   IMPORTS
+========================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600&display=swap");
+
+/* =========================
+   VARIÁVEIS
+========================= */
+
+:root {
+  --cyan: #00f0ff;
+  --cyan-dim: rgba(0, 240, 255, 0.55);
+  --cyan-ghost: rgba(0, 240, 255, 0.08);
+  --cyan-glow: rgba(0, 240, 255, 0.25);
+  --blue-deep: #020c1b;
+  --blue-mid: #040f20;
+  --blue-panel: rgba(2, 12, 28, 0.72);
+  --text-body: rgba(190, 220, 235, 0.88);
+  --text-muted: rgba(120, 170, 190, 0.55);
+  --border: rgba(0, 240, 255, 0.22);
+  --border-hot: rgba(0, 240, 255, 0.65);
+}
+
+/* =========================
+   RESET
+========================= */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =========================
+   BODY
+========================= */
+
+body {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--blue-deep);
+  font-family: "Rajdhani", sans-serif;
+  cursor: crosshair;
+}
+
+/* =========================
+   FUNDO — GRADE HEXAGONAL
+========================= */
+
+.grid {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
+  background-size: 52px 52px;
+  animation: gridPulse 8s ease-in-out infinite;
+}
+
+@keyframes gridPulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* =========================
+   EFEITO DE SCAN HORIZONTAL
+========================= */
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 240, 255, 0.012) 2px,
+    rgba(0, 240, 255, 0.012) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* =========================
+   LINHA DE SCAN ANIMADA
+========================= */
+
+.grid::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--cyan-glow) 20%,
+    var(--cyan) 50%,
+    var(--cyan-glow) 80%,
+    transparent 100%
+  );
+  animation: scanLine 6s linear infinite;
+  opacity: 0.4;
+}
+
+@keyframes scanLine {
+  0% {
+    top: -2px;
+  }
+
+  100% {
+    top: 100%;
+  }
+}
+
+/* =========================
+   PARTÍCULAS
+========================= */
+
+.particulas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.particulas::before,
+.particulas::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.particulas::before {
+  background:
+    radial-gradient(
+      circle at 15% 25%,
+      rgba(0, 240, 255, 0.9) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 85% 15%,
+      rgba(0, 240, 255, 0.7) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 70% 75%,
+      rgba(0, 240, 255, 0.8) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 35% 85%,
+      rgba(0, 240, 255, 0.6) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 55% 40%,
+      rgba(0, 240, 255, 0.5) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 90% 55%,
+      rgba(0, 240, 255, 0.7) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 10% 65%,
+      rgba(0, 240, 255, 0.6) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 45% 10%,
+      rgba(0, 240, 255, 0.8) 1px,
+      transparent 1px
+    );
+  animation: floatParticles 12s ease-in-out infinite alternate;
+}
+
+.particulas::after {
+  background:
+    radial-gradient(
+      circle at 25% 50%,
+      rgba(0, 240, 255, 0.5) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 75% 30%,
+      rgba(0, 240, 255, 0.6) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 60% 90%,
+      rgba(0, 240, 255, 0.4) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 5% 45%,
+      rgba(0, 240, 255, 0.7) 1px,
+      transparent 1px
+    );
+  animation: floatParticles 9s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes floatParticles {
+  0% {
+    transform: translateY(0px);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: translateY(-18px);
+    opacity: 1;
+  }
+}
+
+/* =========================
+   CANTOS DECORATIVOS DO FUNDO
+========================= */
+
+.corner {
+  position: fixed;
+  width: 80px;
+  height: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.corner--tl {
+  top: 24px;
+  left: 24px;
+  border-top: 1px solid var(--border-hot);
+  border-left: 1px solid var(--border-hot);
+}
+
+.corner--tr {
+  top: 24px;
+  right: 24px;
+  border-top: 1px solid var(--border-hot);
+  border-right: 1px solid var(--border-hot);
+}
+
+.corner--bl {
+  bottom: 24px;
+  left: 24px;
+  border-bottom: 1px solid var(--border-hot);
+  border-left: 1px solid var(--border-hot);
+}
+
+.corner--br {
+  bottom: 24px;
+  right: 24px;
+  border-bottom: 1px solid var(--border-hot);
+  border-right: 1px solid var(--border-hot);
+}
+
+/* =========================
+   HUD — DADOS DE STATUS
+========================= */
+
+.hud-bar {
+  position: fixed;
+  top: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 32px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.hud-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.hud-label {
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.58rem;
+  color: var(--text-muted);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+.hud-value {
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.72rem;
+  color: var(--cyan);
+  letter-spacing: 2px;
+  text-shadow: 0 0 8px var(--cyan-glow);
+  animation: blinkValue 3s ease-in-out infinite;
+}
+
+@keyframes blinkValue {
+  0%,
+  90%,
+  100% {
+    opacity: 1;
+  }
+
+  95% {
+    opacity: 0.4;
+  }
+}
+
+.hud-sep {
+  color: var(--border);
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.9rem;
+  line-height: 1;
+  align-self: center;
+}
+
+/* =========================
+   CONTAINER PRINCIPAL
+========================= */
+
+.container-final {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================
+   TEXTO SUPERIOR
+========================= */
+
+.status-topo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--cyan);
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px var(--cyan-glow);
+  animation: fadeSlideDown 0.8s ease both;
+}
+
+.status-topo::before,
+.status-topo::after {
+  content: "";
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: var(--cyan-dim);
+}
+
+@keyframes fadeSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   PAINEL CENTRAL
+========================= */
+
+.painel-final {
+  width: 640px;
+  padding: 0;
+  position: relative;
+  animation: fadeScaleIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+@keyframes fadeScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* BORDA DO PAINEL — SVG CLIPADO */
+
+.painel-inner {
+  padding: 54px 60px 50px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: var(--blue-panel);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Brilho top-center */
+.painel-inner::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--cyan-dim) 50%,
+    transparent
+  );
+}
+
+/* Brilho radial interno */
+.painel-inner::after {
+  content: "";
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 400px;
+  height: 200px;
+  background: radial-gradient(
+    ellipse,
+    rgba(0, 240, 255, 0.06) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* CANTOS DO PAINEL */
+
+.painel-corner {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  pointer-events: none;
+}
+
+.painel-corner--tl {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--cyan);
+  border-left: 2px solid var(--cyan);
+}
+
+.painel-corner--tr {
+  top: -1px;
+  right: -1px;
+  border-top: 2px solid var(--cyan);
+  border-right: 2px solid var(--cyan);
+}
+
+.painel-corner--bl {
+  bottom: -1px;
+  left: -1px;
+  border-bottom: 2px solid var(--cyan);
+  border-left: 2px solid var(--cyan);
+}
+
+.painel-corner--br {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid var(--cyan);
+  border-right: 2px solid var(--cyan);
+}
+
+/* =========================
+   ÍCONE DE VERIFICAÇÃO
+========================= */
+
+.check-ring {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 28px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.check-ring svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  animation: spinRing 10s linear infinite;
+}
+
+@keyframes spinRing {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.check-icon {
+  font-size: 1.4rem;
+  color: var(--cyan);
+  text-shadow: 0 0 10px var(--cyan);
+  z-index: 1;
+}
+
+/* =========================
+   ID DE SESSÃO
+========================= */
+
+.session-id {
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  letter-spacing: 3px;
+  margin-bottom: 22px;
+}
+
+/* =========================
+   TÍTULO
+========================= */
+
+.painel-final h1 {
+  color: #fff;
+  font-family: "Orbitron", sans-serif;
+  font-size: 2.6rem;
+  font-weight: 700;
+  letter-spacing: 10px;
+  margin-bottom: 8px;
+  text-shadow:
+    0 0 20px rgba(0, 240, 255, 0.3),
+    0 0 60px rgba(0, 240, 255, 0.1);
+  position: relative;
+}
+
+.painel-final h1 .accent {
+  color: var(--cyan);
+}
+
+/* Linha decorativa embaixo do título */
+.title-line {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  margin: 14px auto 28px;
+}
+
+/* =========================
+   PARÁGRAFOS
+========================= */
+
+.painel-final p {
+  color: var(--text-body);
+  font-family: "Rajdhani", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.85;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+}
+
+/* =========================
+   SEPARADOR
+========================= */
+
+.separator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 22px 0 26px;
+  opacity: 0.35;
+}
+
+.separator::before,
+.separator::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--cyan);
+}
+
+.separator-dot {
+  width: 4px;
+  height: 4px;
+  border: 1px solid var(--cyan);
+  transform: rotate(45deg);
+}
+
+/* =========================
+   BOTÃO
+========================= */
+
+#btnEntrar {
+  position: relative;
+  margin-top: 8px;
+  padding: 15px 52px;
+  background: transparent;
+  border: 1px solid var(--cyan-dim);
+  color: var(--cyan);
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  cursor: crosshair;
+  transition:
+    border-color 0.25s,
+    box-shadow 0.25s,
+    color 0.25s,
+    background 0.25s;
+  overflow: hidden;
+  border-radius: 2px;
+}
+
+/* Cantos do botão */
+#btnEntrar::before,
+#btnEntrar::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  transition: 0.25s;
+}
+
+#btnEntrar::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--cyan);
+  border-left: 2px solid var(--cyan);
+}
+
+#btnEntrar::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid var(--cyan);
+  border-right: 2px solid var(--cyan);
+}
+
+/* Efeito de scan no hover */
+.btn-scan {
+  position: absolute;
+  left: -100%;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 240, 255, 0.08),
+    transparent
+  );
+  transition: left 0s;
+  pointer-events: none;
+}
+
+#btnEntrar:hover .btn-scan {
+  left: 100%;
+  transition: left 0.5s ease;
+}
+
+#btnEntrar:hover {
+  background: rgba(0, 240, 255, 0.06);
+  border-color: var(--cyan);
+  color: #fff;
+  box-shadow:
+    0 0 20px rgba(0, 240, 255, 0.2),
+    inset 0 0 20px rgba(0, 240, 255, 0.04);
+}
+
+#btnEntrar:active {
+  transform: scale(0.98);
+}
+
+/* =========================
+   STATUS INFERIOR
+========================= */
+
+.status-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  animation: fadeSlideUp 0.8s ease 0.4s both;
+}
+
+.status-node {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "Share Tech Mono", monospace;
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.node-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 6px var(--cyan);
+  animation: nodePulse 2s ease-in-out infinite;
+}
+
+.node-dot.ok {
+  background: #00ff9d;
+  box-shadow: 0 0 6px #00ff9d;
+  animation-delay: 0s;
+}
+
+.node-dot.warn {
+  background: #ffcc00;
+  box-shadow: 0 0 6px #ffcc00;
+  animation-delay: 0.6s;
+}
+
+.node-dot.info {
+  background: var(--cyan);
+  animation-delay: 1.2s;
+}
+
+@keyframes nodePulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.4;
+    transform: scale(0.7);
+  }
+}
+
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================
+   TELA DE TRANSIÇÃO
+========================= */
+
+.transicao {
+  position: fixed;
+  inset: 0;
+  background: #020c1b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  z-index: 9999;
+}
+
+.transicao::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
+  background-size: 52px 52px;
+}
+
+.transicao.ativa {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* =========================
+   LOADER
+========================= */
+
+.loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.transicao-logo {
+  font-family: "Share Tech Mono", monospace;
+  color: var(--text-muted);
+  font-size: 0.58rem;
+  letter-spacing: 8px;
+  margin-bottom: 40px;
+  text-transform: uppercase;
+}
+
+/* CÍRCULO GIRATÓRIO */
+
+.loader-ring {
+  width: 72px;
+  height: 72px;
+  position: relative;
+  margin-bottom: 36px;
+}
+
+.loader-ring svg {
+  width: 100%;
+  height: 100%;
+  animation: spinRing 1.8s linear infinite;
+}
+
+.loader-ring-pct {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Orbitron", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--cyan);
+}
+
+/* TEXTO CARREGANDO */
+
+#textoCarregando {
+  font-family: "Share Tech Mono", monospace;
+  color: var(--text-body);
+  font-size: 0.78rem;
+  letter-spacing: 4px;
+  margin-bottom: 20px;
+  min-height: 1.2em;
+  text-transform: uppercase;
+  text-shadow: 0 0 6px rgba(0, 240, 255, 0.25);
+}
+
+/* BARRA */
+
+.barra-container {
+  width: 320px;
+  height: 2px;
+  background: rgba(0, 240, 255, 0.08);
+  margin-bottom: 28px;
+  position: relative;
+}
+
+.barra-container::before,
+.barra-container::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 5px;
+  border: 1px solid var(--border);
+  transform: rotate(45deg);
+}
+
+.barra-container::before {
+  left: -8px;
+}
+
+.barra-container::after {
+  right: -8px;
+}
+
+.barra {
+  width: 0%;
+  height: 100%;
+  background: var(--cyan);
+  box-shadow:
+    0 0 10px var(--cyan),
+    0 0 20px rgba(0, 240, 255, 0.4);
+  transition: width 0.08s linear;
+  position: relative;
+}
+
+.barra::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 4px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--cyan);
+}
+
+/* PORCENTAGEM */
+
+#porcentagem {
+  font-family: "Orbitron", sans-serif;
+  color: var(--cyan);
+  font-size: 3.2rem;
+  font-weight: 300;
+  letter-spacing: 4px;
+  text-shadow: 0 0 20px rgba(0, 240, 255, 0.5);
+  line-height: 1;
+}
